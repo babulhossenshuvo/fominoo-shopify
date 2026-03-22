@@ -1,0 +1,787 @@
+
+<footer class="fominoo-footer" id="fominoo-footer" aria-label="Site footer">
+
+  {%- comment -%} ── TOP BAND: Newsletter ── {%- endcomment -%}
+  <div class="fmf-newsletter-band">
+    <div class="fmf-inner">
+      <div class="fmf-newsletter-content">
+        <div class="fmf-newsletter-text">
+          <span class="fmf-newsletter-eyebrow">Stay in the loop</span>
+          <h2 class="fmf-newsletter-heading">The World of Fominoo</h2>
+          <p class="fmf-newsletter-subtext">New arrivals, exclusive drops &amp; style inspiration delivered straight to you.</p>
+        </div>
+        <div class="fmf-newsletter-form-wrap">
+          {% form 'customer', id: 'fominoo-newsletter-form' %}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="fmf-newsletter-field">
+              <label for="fmf-email" class="visually-hidden">Email address</label>
+              <input
+                type="email"
+                id="fmf-email"
+                name="contact[email]"
+                placeholder="Your email address"
+                autocomplete="email"
+                required
+                aria-label="Email address"
+                class="fmf-email-input"
+              >
+              <button type="submit" class="fmf-subscribe-btn" aria-label="Subscribe">
+                <span>Subscribe</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+            {%- if form.posted_successfully? -%}
+              <p class="fmf-success-msg">✓ You're in! Welcome to the Fominoo world.</p>
+            {%- endif -%}
+            {%- if form.errors -%}
+              <p class="fmf-error-msg">{{ form.errors | default_errors }}</p>
+            {%- endif -%}
+          {% endform %}
+          <p class="fmf-newsletter-note">No spam, unsubscribe at any time. By subscribing you agree to our <a href="{{ shop.url }}/policies/privacy-policy">Privacy Policy</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ── MAIN FOOTER GRID ── {%- endcomment -%}
+  <div class="fmf-main">
+    <div class="fmf-inner">
+      <div class="fmf-grid">
+
+        {%- comment -%} Column 1 – Brand {%- endcomment -%}
+        <div class="fmf-col fmf-col--brand">
+          <a href="{{ routes.root_url }}" class="fmf-logo-link" aria-label="{{ shop.name }} home">
+            {%- if settings.logo != blank -%}
+              <img
+                src="{{ settings.logo | image_url: width: 160 }}"
+                alt="{{ shop.name }}"
+                width="160"
+                height="{{ 160 | divided_by: settings.logo.aspect_ratio | round }}"
+                loading="lazy"
+                class="fmf-logo-img"
+              >
+            {%- else -%}
+              <span class="fmf-logo-text">{{ shop.name }}</span>
+            {%- endif -%}
+          </a>
+          <p class="fmf-brand-desc">International fashion for the modern world. Curated style, global reach — from runway to reality.</p>
+          <div class="fmf-social-row" aria-label="Social media links">
+            {%- if section.settings.instagram_url != blank -%}
+              <a href="{{ section.settings.instagram_url }}" class="fmf-social-icon" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.facebook_url != blank -%}
+              <a href="{{ section.settings.facebook_url }}" class="fmf-social-icon" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.tiktok_url != blank -%}
+              <a href="{{ section.settings.tiktok_url }}" class="fmf-social-icon" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.04a8.15 8.15 0 0 0 4.78 1.53V7.13a4.85 4.85 0 0 1-1.01-.44z"/></svg>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.twitter_url != blank -%}
+              <a href="{{ section.settings.twitter_url }}" class="fmf-social-icon" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.pinterest_url != blank -%}
+              <a href="{{ section.settings.pinterest_url }}" class="fmf-social-icon" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.852 0 1.265.64 1.265 1.408 0 .858-.546 2.14-.828 3.33-.236.995.499 1.806 1.476 1.806 1.772 0 3.137-1.868 3.137-4.566 0-2.388-1.717-4.057-4.168-4.057-2.837 0-4.502 2.128-4.502 4.329 0 .857.33 1.775.742 2.277a.3.3 0 0 1 .069.284c-.076.313-.244.995-.277 1.134-.044.183-.146.222-.336.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.966-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.938.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.youtube_url != blank -%}
+              <a href="{{ section.settings.youtube_url }}" class="fmf-social-icon" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+
+        {%- comment -%} Column 2 – Shop {%- endcomment -%}
+        <div class="fmf-col">
+          <h3 class="fmf-col-heading">Shop</h3>
+          <ul class="fmf-nav-list">
+            <li><a href="{{ routes.collections_url }}">All Collections</a></li>
+            <li><a href="{{ routes.collections_url }}/new-arrivals">New Arrivals</a></li>
+            <li><a href="{{ routes.collections_url }}/best-sellers">Best Sellers</a></li>
+            <li><a href="{{ routes.collections_url }}/sale">Sale</a></li>
+            <li><a href="{{ routes.collections_url }}/accessories">Accessories</a></li>
+            <li><a href="{{ routes.collections_url }}/gift-sets">Gift Sets</a></li>
+          </ul>
+        </div>
+
+        {%- comment -%} Column 3 – Help {%- endcomment -%}
+        <div class="fmf-col">
+          <h3 class="fmf-col-heading">Help</h3>
+          <ul class="fmf-nav-list">
+            <li><a href="{{ routes.root_url }}/pages/faq">FAQ</a></li>
+            <li><a href="{{ routes.root_url }}/pages/shipping-returns">Shipping &amp; Returns</a></li>
+            <li><a href="{{ routes.root_url }}/pages/size-guide">Size Guide</a></li>
+            <li><a href="{{ routes.root_url }}/pages/track-order">Track My Order</a></li>
+            <li><a href="{{ routes.root_url }}/pages/contact">Contact Us</a></li>
+            <li><a href="{{ routes.root_url }}/pages/sustainability">Sustainability</a></li>
+          </ul>
+        </div>
+
+        {%- comment -%} Column 4 – Company {%- endcomment -%}
+        <div class="fmf-col">
+          <h3 class="fmf-col-heading">Company</h3>
+          <ul class="fmf-nav-list">
+            <li><a href="{{ routes.root_url }}/pages/about">About Fominoo</a></li>
+            <li><a href="{{ routes.root_url }}/pages/careers">Careers</a></li>
+            <li><a href="{{ routes.root_url }}/pages/press">Press</a></li>
+            <li><a href="{{ routes.root_url }}/blogs/news">Journal</a></li>
+            <li><a href="{{ routes.root_url }}/pages/affiliate">Affiliate Program</a></li>
+          </ul>
+        </div>
+
+        {%- comment -%} Column 5 – Contact Info {%- endcomment -%}
+        <div class="fmf-col">
+          <h3 class="fmf-col-heading">Contact</h3>
+          <ul class="fmf-contact-list">
+            {%- if section.settings.contact_email != blank -%}
+              <li>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <a href="mailto:{{ section.settings.contact_email }}">{{ section.settings.contact_email }}</a>
+              </li>
+            {%- endif -%}
+            {%- if section.settings.contact_phone != blank -%}
+              <li>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.45 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.77-.77a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <a href="tel:{{ section.settings.contact_phone }}">{{ section.settings.contact_phone }}</a>
+              </li>
+            {%- endif -%}
+            {%- if section.settings.business_address != blank -%}
+              <li>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>{{ section.settings.business_address }}</span>
+              </li>
+            {%- endif -%}
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Mon–Fri, 9am–6pm (GMT)</span>
+            </li>
+          </ul>
+
+          <div class="fmf-trust-badges" aria-label="Trust badges">
+            <div class="fmf-trust-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Secure Checkout</span>
+            </div>
+            <div class="fmf-trust-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+              <span>Free Returns</span>
+            </div>
+            <div class="fmf-trust-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              <span>Fast Delivery</span>
+            </div>
+          </div>
+        </div>
+
+      </div>{%- comment -%} /fmf-grid {%- endcomment -%}
+    </div>
+  </div>
+
+  {%- comment -%} ── PAYMENT GATEWAYS STRIP ── {%- endcomment -%}
+  <div class="fmf-payment-strip">
+    <div class="fmf-inner">
+      <div class="fmf-payment-wrap">
+        <span class="fmf-payment-label">We Accept</span>
+        <ul class="fmf-payment-list" aria-label="Payment methods" role="list">
+          {%- for type in shop.enabled_payment_types -%}
+            <li class="fmf-payment-item">{{ type | payment_type_svg_tag: class: 'fmf-payment-svg' }}</li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ── BOTTOM BAR ── {%- endcomment -%}
+  <div class="fmf-bottom-bar">
+    <div class="fmf-inner">
+      <div class="fmf-bottom-row">
+
+        <div class="fmf-copyright">
+          <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</span>
+        </div>
+
+        <nav class="fmf-policy-links" aria-label="Legal links">
+          {%- for policy in shop.policies -%}
+            {%- if policy != blank -%}
+              <a href="{{ policy.url }}" class="fmf-policy-link">{{ policy.title }}</a>
+            {%- endif -%}
+          {%- endfor -%}
+        </nav>
+
+        <div class="fmf-built-with">
+          <span>Crafted with ♥ for global fashion</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+{% stylesheet %}
+/* ============================================================
+   FOMINOO FOOTER — Modern International Fashion Footer
+   ============================================================ */
+
+/* ── Google Font import ── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap');
+
+:root {
+  --fmf-bg:             #0f0f0f;
+  --fmf-bg-soft:        #161616;
+  --fmf-bg-band:        #1a1a1a;
+  --fmf-accent:         #c9a96e;       /* warm gold — fashion luxury */
+  --fmf-accent-hover:   #e6c98a;
+  --fmf-text:           #e2e2e2;
+  --fmf-text-muted:     #888;
+  --fmf-text-soft:      #bbb;
+  --fmf-border:         rgba(255,255,255,0.07);
+  --fmf-radius:         10px;
+  --fmf-transition:     0.2s ease;
+  --fmf-max-width:      1280px;
+}
+
+/* ── Wrapper ── */
+.fominoo-footer {
+  background: var(--fmf-bg);
+  color: var(--fmf-text);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  border-top: 1px solid var(--fmf-border);
+}
+
+.fmf-inner {
+  max-width: var(--fmf-max-width);
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 80px);
+}
+
+/* ── Newsletter Band ── */
+.fmf-newsletter-band {
+  background: var(--fmf-bg-band);
+  border-bottom: 1px solid var(--fmf-border);
+  padding-block: clamp(48px, 7vw, 80px);
+}
+
+.fmf-newsletter-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .fmf-newsletter-content {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+.fmf-newsletter-eyebrow {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fmf-accent);
+  margin-bottom: 10px;
+}
+
+.fmf-newsletter-heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0 0 12px;
+  line-height: 1.2;
+}
+
+.fmf-newsletter-subtext {
+  color: var(--fmf-text-muted);
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.fmf-newsletter-field {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--fmf-border);
+  border-radius: var(--fmf-radius);
+  overflow: hidden;
+  background: rgba(255,255,255,0.04);
+  transition: border-color var(--fmf-transition), box-shadow var(--fmf-transition);
+}
+
+.fmf-newsletter-field:focus-within {
+  border-color: var(--fmf-accent);
+  box-shadow: 0 0 0 3px rgba(201,169,110,0.15);
+}
+
+.fmf-email-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 14px 18px;
+  color: var(--fmf-text);
+  font-size: 0.875rem;
+  font-family: inherit;
+  min-width: 0;
+}
+
+.fmf-email-input::placeholder {
+  color: var(--fmf-text-muted);
+}
+
+.fmf-subscribe-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--fmf-accent);
+  color: #0f0f0f;
+  border: none;
+  padding: 14px 22px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--fmf-transition), gap var(--fmf-transition);
+}
+
+.fmf-subscribe-btn:hover {
+  background: var(--fmf-accent-hover);
+  gap: 12px;
+}
+
+.fmf-newsletter-note {
+  margin-top: 12px;
+  font-size: 0.75rem;
+  color: var(--fmf-text-muted);
+  line-height: 1.5;
+}
+
+.fmf-newsletter-note a {
+  color: var(--fmf-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.fmf-success-msg {
+  margin-top: 10px;
+  color: #5dd39e;
+  font-size: 0.85rem;
+}
+
+.fmf-error-msg {
+  margin-top: 10px;
+  color: #f87171;
+  font-size: 0.85rem;
+}
+
+/* ── Main Grid ── */
+.fmf-main {
+  padding-block: clamp(56px, 8vw, 90px);
+}
+
+.fmf-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr 1.3fr;
+  gap: 40px;
+}
+
+@media screen and (max-width: 1024px) {
+  .fmf-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 36px;
+  }
+
+  .fmf-col--brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .fmf-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  .fmf-col--brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .fmf-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Brand Column ── */
+.fmf-logo-link {
+  display: inline-block;
+  margin-bottom: 16px;
+  text-decoration: none;
+}
+
+.fmf-logo-img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.fmf-logo-text {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+}
+
+.fmf-brand-desc {
+  color: var(--fmf-text-muted);
+  font-size: 0.85rem;
+  line-height: 1.75;
+  margin: 0 0 24px;
+  max-width: 280px;
+}
+
+/* ── Social Icons ── */
+.fmf-social-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.fmf-social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--fmf-border);
+  border-radius: 50%;
+  color: var(--fmf-text-muted);
+  text-decoration: none;
+  transition: border-color var(--fmf-transition), color var(--fmf-transition), background var(--fmf-transition), transform var(--fmf-transition);
+}
+
+.fmf-social-icon:hover {
+  border-color: var(--fmf-accent);
+  color: var(--fmf-accent);
+  background: rgba(201,169,110,0.08);
+  transform: translateY(-2px);
+}
+
+/* ── Nav Columns ── */
+.fmf-col-heading {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0 0 20px;
+}
+
+.fmf-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.fmf-nav-list a {
+  color: var(--fmf-text-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color var(--fmf-transition), padding-left var(--fmf-transition);
+  display: inline-block;
+}
+
+.fmf-nav-list a:hover {
+  color: var(--fmf-accent);
+  padding-left: 4px;
+}
+
+/* ── Contact Column ── */
+.fmf-contact-list {
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fmf-contact-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--fmf-text-muted);
+  font-size: 0.85rem;
+}
+
+.fmf-contact-list li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--fmf-accent);
+}
+
+.fmf-contact-list a {
+  color: var(--fmf-text-muted);
+  text-decoration: none;
+  transition: color var(--fmf-transition);
+}
+
+.fmf-contact-list a:hover {
+  color: var(--fmf-accent);
+}
+
+/* ── Trust Badges ── */
+.fmf-trust-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--fmf-border);
+  border-radius: var(--fmf-radius);
+  background: rgba(255,255,255,0.025);
+}
+
+.fmf-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: var(--fmf-text-soft);
+}
+
+.fmf-trust-item svg {
+  color: var(--fmf-accent);
+  flex-shrink: 0;
+}
+
+/* ── Payment Strip ── */
+.fmf-payment-strip {
+  background: var(--fmf-bg-soft);
+  border-top: 1px solid var(--fmf-border);
+  border-bottom: 1px solid var(--fmf-border);
+  padding-block: 20px;
+}
+
+.fmf-payment-wrap {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.fmf-payment-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fmf-text-muted);
+  white-space: nowrap;
+}
+
+.fmf-payment-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.fmf-payment-item {
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 5px 10px;
+  transition: background var(--fmf-transition);
+}
+
+.fmf-payment-item:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.fmf-payment-svg {
+  height: 22px;
+  width: auto;
+  display: block;
+}
+
+/* ── Bottom Bar ── */
+.fmf-bottom-bar {
+  padding-block: 20px;
+  background: var(--fmf-bg);
+}
+
+.fmf-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 640px) {
+  .fmf-bottom-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+}
+
+.fmf-copyright {
+  font-size: 0.78rem;
+  color: var(--fmf-text-muted);
+}
+
+.fmf-policy-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  justify-content: center;
+}
+
+.fmf-policy-link {
+  font-size: 0.78rem;
+  color: var(--fmf-text-muted);
+  text-decoration: none;
+  transition: color var(--fmf-transition);
+  position: relative;
+}
+
+.fmf-policy-link:hover {
+  color: var(--fmf-accent);
+}
+
+.fmf-policy-link + .fmf-policy-link::before {
+  content: '·';
+  position: absolute;
+  left: -12px;
+  color: var(--fmf-border);
+  pointer-events: none;
+}
+
+.fmf-built-with {
+  font-size: 0.75rem;
+  color: var(--fmf-text-muted);
+  white-space: nowrap;
+}
+
+/* ── Accessibility  ── */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0,0,0,0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Fominoo Footer",
+  "tag": "div",
+  "class": "fominoo-footer-wrapper",
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Social Media Links"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL",
+      "default": "https://www.instagram.com/"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL",
+      "default": "https://www.facebook.com/"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "TikTok URL",
+      "default": "https://www.tiktok.com/"
+    },
+    {
+      "type": "url",
+      "id": "twitter_url",
+      "label": "X (Twitter) URL",
+      "default": "https://x.com/"
+    },
+    {
+      "type": "url",
+      "id": "pinterest_url",
+      "label": "Pinterest URL"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube URL",
+      "default": "https://www.youtube.com/"
+    },
+    {
+      "type": "header",
+      "content": "Contact Information"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Email Address",
+      "default": "hello@fominoo.com"
+    },
+    {
+      "type": "text",
+      "id": "contact_phone",
+      "label": "Phone Number",
+      "default": "+1 (800) 000-0000"
+    },
+    {
+      "type": "textarea",
+      "id": "business_address",
+      "label": "Business Address",
+      "default": "Fominoo HQ, Fashion District"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fominoo Footer",
+      "category": "Footer"
+    }
+  ]
+}
+{% endschema %}
