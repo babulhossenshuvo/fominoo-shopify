@@ -4,6 +4,13 @@
   {{ closest.product | structured_data }}
 </script>
 
+{{- 'fominoo-product-page.css' | asset_url | stylesheet_tag -}}
+
+{%- comment -%}
+  Fominoo Product Page Enhancements
+  Premium variant selection, trust badges, size guide
+{%- endcomment -%}
+
 {% capture media_gallery %}
   {%- content_for 'block',
     type: '_product-media-gallery',

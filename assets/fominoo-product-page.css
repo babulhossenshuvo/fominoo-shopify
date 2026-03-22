@@ -1,0 +1,622 @@
+/* ============================================================
+   FOMINOO — Premium Product Page Enhancement
+   International Fashion · Modern Variant Selection
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500&display=swap');
+
+/* ── Brand tokens ── */
+:root {
+  --fpp-accent:         #c9a96e;
+  --fpp-accent-dark:    #7a5c1e;
+  --fpp-accent-light:   #f5eedd;
+  --fpp-accent-mid:     rgba(201,169,110,0.15);
+  --fpp-dark:           #0f0f0f;
+  --fpp-text:           #1a1a1a;
+  --fpp-muted:          #6b7280;
+  --fpp-border:         #e5e7eb;
+  --fpp-border-hover:   #d1d5db;
+  --fpp-bg-soft:        #f9f9f7;
+  --fpp-radius-sm:      6px;
+  --fpp-radius:         10px;
+  --fpp-radius-lg:      14px;
+  --fpp-ease:           cubic-bezier(0.4,0,0.2,1);
+  --fpp-transition:     0.18s var(--fpp-ease);
+}
+
+/* ============================================================
+   SECTION WRAPPER
+   ============================================================ */
+.section-wrapper:has(product-form-component),
+[id^="shopify-section"]:has(.variant-picker) {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* ============================================================
+   PRODUCT TITLE — Bigger, Serif
+   ============================================================ */
+.product-information h1,
+.product-information .h1,
+product-form-component ~ * h1 {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+/* ============================================================
+   PRICE
+   ============================================================ */
+.price--large,
+.price__sale {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: var(--fpp-text) !important;
+  letter-spacing: -0.02em;
+}
+
+.price__compare {
+  font-size: 1rem !important;
+  color: var(--fpp-muted) !important;
+  text-decoration: line-through;
+  font-weight: 400 !important;
+}
+
+.price--on-sale .price__regular {
+  display: none;
+}
+
+/* ============================================================
+   VARIANT PICKER — Complete Overhaul
+   ============================================================ */
+.variant-picker {
+  width: 100%;
+}
+
+.variant-picker__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Option group ── */
+.variant-option {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Legend (option name label) ── */
+.variant-option legend,
+.variant-option > label:first-of-type {
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: var(--fpp-muted) !important;
+  margin-bottom: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+/* Selected value shown inline after legend */
+.variant-option__swatch-value {
+  font-weight: 500 !important;
+  color: var(--fpp-text) !important;
+  font-size: 0.82rem !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  padding: 2px 8px;
+  background: var(--fpp-accent-light);
+  color: var(--fpp-accent-dark) !important;
+  border-radius: 100px;
+}
+
+/* ── Button grid ── */
+.variant-option--buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+}
+
+.variant-option--buttons legend {
+  margin-bottom: 10px;
+}
+
+.variant-option--buttons .variant-option__button-label {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  padding: 0 16px !important;
+  border: 1.5px solid var(--fpp-border) !important;
+  border-radius: var(--fpp-radius-sm) !important;
+  background: #ffffff !important;
+  cursor: pointer !important;
+  position: relative !important;
+  transition:
+    border-color var(--fpp-transition),
+    background var(--fpp-transition),
+    color var(--fpp-transition),
+    box-shadow var(--fpp-transition),
+    transform var(--fpp-transition) !important;
+  overflow: hidden !important;
+}
+
+/* The flex wrap container for buttons */
+.variant-option--buttons:not(.variant-option--swatches) {
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+/* Button text */
+.variant-option__button-label__text {
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  color: var(--fpp-text) !important;
+  line-height: 1 !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* Available pill indicator inside button */
+.variant-option__button-label__pill {
+  display: none !important;
+}
+
+/* ── HOVER state ── */
+.variant-option--buttons .variant-option__button-label:hover {
+  border-color: var(--fpp-accent) !important;
+  background: var(--fpp-accent-light) !important;
+  box-shadow: 0 0 0 3px var(--fpp-accent-mid) !important;
+  transform: translateY(-1px) !important;
+  z-index: 2;
+}
+
+.variant-option--buttons .variant-option__button-label:hover .variant-option__button-label__text {
+  color: var(--fpp-accent-dark) !important;
+}
+
+/* ── SELECTED state (checked radio) ── */
+.variant-option--buttons .variant-option__button-label:has(input:checked) {
+  border-color: var(--fpp-dark) !important;
+  background: var(--fpp-dark) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;
+  transform: translateY(-1px) !important;
+}
+
+.variant-option--buttons .variant-option__button-label:has(input:checked) .variant-option__button-label__text {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+/* ── DISABLED / Out of stock ── */
+.variant-option--buttons .variant-option__button-label:has(input[aria-disabled="true"]) {
+  border-color: var(--fpp-border) !important;
+  background: var(--fpp-bg-soft) !important;
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
+/* Strikethrough for unavailable */
+.variant-option__button-label:has(input[aria-disabled="true"]) .variant-option__button-label__text::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  height: 1.5px;
+  background: currentColor;
+  opacity: 0.4;
+  transform: rotate(-20deg);
+}
+
+/* ── Hide actual radio inputs ── */
+.variant-option__button-label input[type="radio"] {
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  pointer-events: none !important;
+  margin: 0 !important;
+}
+
+/* ============================================================
+   SWATCHES — Color & Image options
+   ============================================================ */
+.variant-option--swatches {
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+.variant-option--swatches .variant-option__button-label--has-swatch {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  border: 2px solid transparent !important;
+  outline: 2px solid transparent !important;
+  outline-offset: 2px;
+  transition:
+    outline-color var(--fpp-transition),
+    transform var(--fpp-transition),
+    box-shadow var(--fpp-transition) !important;
+}
+
+.variant-option--swatches .variant-option__button-label--has-swatch:hover {
+  outline-color: var(--fpp-accent) !important;
+  transform: scale(1.1) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+}
+
+.variant-option--swatches .variant-option__button-label--has-swatch:has(input:checked) {
+  outline-color: var(--fpp-dark) !important;
+  outline-width: 2.5px !important;
+  transform: scale(1.08) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+}
+
+/* ============================================================
+   DROPDOWN SELECT — Enhanced
+   ============================================================ */
+.variant-option--dropdowns {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.variant-option--dropdowns > label {
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: var(--fpp-muted) !important;
+}
+
+.variant-option__select-wrapper {
+  border: 1.5px solid var(--fpp-border) !important;
+  border-radius: var(--fpp-radius) !important;
+  background: #ffffff;
+  transition: border-color var(--fpp-transition), box-shadow var(--fpp-transition) !important;
+}
+
+.variant-option__select-wrapper:hover,
+.variant-option__select-wrapper:focus-within {
+  border-color: var(--fpp-accent) !important;
+  box-shadow: 0 0 0 3px var(--fpp-accent-mid) !important;
+}
+
+.variant-option__select {
+  padding: 14px 40px 14px 16px !important;
+  font-size: 0.9rem !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-weight: 500 !important;
+  color: var(--fpp-text) !important;
+  background: transparent !important;
+}
+
+/* ============================================================
+   ADD TO CART BUTTON — Premium
+   ============================================================ */
+.add-to-cart-button,
+.add-to-cart-button.button {
+  background: var(--fpp-dark) !important;
+  color: #ffffff !important;
+  border: 2px solid var(--fpp-dark) !important;
+  border-radius: var(--fpp-radius) !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  padding: 0 32px !important;
+  height: 52px !important;
+  min-height: 52px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  cursor: pointer !important;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background var(--fpp-transition),
+    border-color var(--fpp-transition),
+    transform var(--fpp-transition),
+    box-shadow var(--fpp-transition) !important;
+}
+
+.add-to-cart-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.add-to-cart-button:hover:not(:disabled) {
+  background: #2a2a2a !important;
+  border-color: #2a2a2a !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25) !important;
+  transform: translateY(-2px) !important;
+}
+
+.add-to-cart-button:active:not(:disabled) {
+  transform: translateY(0) !important;
+  box-shadow: none !important;
+}
+
+.add-to-cart-button:disabled {
+  background: var(--fpp-bg-soft) !important;
+  border-color: var(--fpp-border) !important;
+  color: var(--fpp-muted) !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* ── Add icon glow animation on success ── */
+.add-to-cart-button .add-to-cart__added {
+  background: transparent !important;
+}
+
+/* ============================================================
+   QUANTITY SELECTOR — Refined
+   ============================================================ */
+.quantity-selector,
+quantity-selector {
+  display: flex !important;
+  align-items: center !important;
+  border: 1.5px solid var(--fpp-border) !important;
+  border-radius: var(--fpp-radius) !important;
+  overflow: hidden !important;
+  height: 52px !important;
+  background: #ffffff;
+  transition: border-color var(--fpp-transition) !important;
+}
+
+.quantity-selector:hover,
+.quantity-selector:focus-within {
+  border-color: var(--fpp-accent) !important;
+}
+
+.quantity-selector__button,
+quantity-selector button {
+  width: 44px !important;
+  height: 100% !important;
+  border: none !important;
+  background: transparent !important;
+  color: var(--fpp-text) !important;
+  font-size: 1.1rem !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: background var(--fpp-transition) !important;
+}
+
+.quantity-selector__button:hover,
+quantity-selector button:hover {
+  background: var(--fpp-bg-soft) !important;
+}
+
+.quantity-selector__input,
+quantity-selector input[type="number"] {
+  width: 48px !important;
+  text-align: center !important;
+  border: none !important;
+  border-left: 1px solid var(--fpp-border) !important;
+  border-right: 1px solid var(--fpp-border) !important;
+  background: transparent !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  color: var(--fpp-text) !important;
+  -moz-appearance: textfield !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  outline: none !important;
+}
+
+.quantity-selector__input::-webkit-outer-spin-button,
+.quantity-selector__input::-webkit-inner-spin-button {
+  display: none !important;
+}
+
+/* ============================================================
+   PRODUCT FORM BUTTONS ROW
+   ============================================================ */
+.product-form-buttons {
+  display: flex !important;
+  gap: 10px !important;
+  flex-wrap: wrap !important;
+  align-items: stretch !important;
+}
+
+.product-form-buttons > *:not(.quantity-rules, .quantity-label, .volume-pricing) {
+  flex: 1 1 180px !important;
+}
+
+/* ============================================================
+   ACCELERATED CHECKOUT (Shop Pay, etc.)
+   ============================================================ */
+.shopify-payment-button,
+.shopify-payment-button__button {
+  border-radius: var(--fpp-radius) !important;
+  min-height: 52px !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+}
+
+/* ============================================================
+   TRUST BADGES — New addition below buy buttons
+   ============================================================ */
+.fpp-trust-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--fpp-border);
+  margin-top: 4px;
+}
+
+.fpp-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--fpp-muted);
+  white-space: nowrap;
+}
+
+.fpp-trust-item svg {
+  color: #5dd39e;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   SIZE GUIDE LINK
+   ============================================================ */
+.fpp-size-guide-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--fpp-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color var(--fpp-transition);
+  margin-top: -8px;
+  margin-bottom: 4px;
+}
+
+.fpp-size-guide-link:hover {
+  color: var(--fpp-accent-dark);
+}
+
+/* ============================================================
+   STICKY ADD TO CART BAR — Enhanced
+   ============================================================ */
+.sticky-add-to-cart__bar {
+  border-radius: var(--fpp-radius-lg) !important;
+  backdrop-filter: blur(24px) saturate(200%) !important;
+}
+
+.sticky-add-to-cart__button {
+  background: var(--fpp-dark) !important;
+  border-radius: var(--fpp-radius) !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  transition: background var(--fpp-transition), transform var(--fpp-transition) !important;
+}
+
+.sticky-add-to-cart__button:hover {
+  background: #2a2a2a !important;
+  transform: scale(1.02) !important;
+}
+
+/* ============================================================
+   PRODUCT DESCRIPTION
+   ============================================================ */
+.rte,
+.product-description {
+  font-size: 0.9rem !important;
+  line-height: 1.8 !important;
+  color: #374151 !important;
+}
+
+.rte h2, .rte h3, .rte h4 {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-weight: 500 !important;
+  margin-block: 1.5rem 0.5rem !important;
+}
+
+.rte ul li {
+  padding-left: 0;
+  list-style: disc;
+  color: #374151;
+}
+
+/* ============================================================
+   PRODUCT IMAGE GALLERY — Light touch enhancements
+   ============================================================ */
+.product-media-gallery,
+.product-media-container {
+  border-radius: var(--fpp-radius) !important;
+  overflow: hidden;
+}
+
+/* Media hover zoom */
+.product-media-gallery img {
+  transition: transform 0.4s var(--fpp-ease) !important;
+}
+
+.product-media-gallery img:hover {
+  transform: scale(1.02) !important;
+}
+
+/* Thumbnail active state */
+.thumbnail:has(input:checked),
+.thumbnail--active {
+  outline: 2px solid var(--fpp-dark) !important;
+  outline-offset: 2px !important;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   PRODUCT RECOMMENDATIONS SECTION
+   ============================================================ */
+.product-recommendations h3,
+.product-recommendations .h3 {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-weight: 500 !important;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem) !important;
+  letter-spacing: -0.01em;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media screen and (max-width: 750px) {
+  .variant-option--buttons:not(.variant-option--swatches) {
+    gap: 6px !important;
+  }
+
+  .variant-option--buttons .variant-option__button-label {
+    min-height: 40px !important;
+    padding: 0 12px !important;
+  }
+
+  .add-to-cart-button {
+    height: 48px !important;
+    min-height: 48px !important;
+  }
+
+  .quantity-selector {
+    height: 48px !important;
+  }
+
+  .fpp-trust-row {
+    justify-content: center;
+  }
+}
+
+/* ============================================================
+   FOCUS VISIBLE (Accessibility)
+   ============================================================ */
+.variant-option__button-label:focus-within {
+  outline: 2px solid var(--fpp-accent) !important;
+  outline-offset: 2px !important;
+}
+
+.add-to-cart-button:focus-visible {
+  outline: 3px solid var(--fpp-accent) !important;
+  outline-offset: 3px !important;
+}
