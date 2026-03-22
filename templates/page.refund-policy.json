@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "policy_hero": {
+      "type": "fominoo-policy-page",
+      "settings": {}
+    },
+    "refund_content": {
+      "type": "fominoo-refund-policy",
+      "settings": {}
+    }
+  },
+  "order": ["policy_hero", "refund_content"]
+}

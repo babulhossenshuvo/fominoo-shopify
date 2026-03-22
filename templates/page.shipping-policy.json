@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "policy_hero": {
+      "type": "fominoo-policy-page",
+      "settings": {}
+    },
+    "shipping_content": {
+      "type": "fominoo-shipping-policy",
+      "settings": {}
+    }
+  },
+  "order": ["policy_hero", "shipping_content"]
+}

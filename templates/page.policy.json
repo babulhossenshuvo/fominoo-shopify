@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "policy_header": {
+      "type": "fominoo-policy-page",
+      "settings": {}
+    }
+  },
+  "order": ["policy_header"]
+}

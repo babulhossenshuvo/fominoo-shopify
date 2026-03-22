@@ -1,0 +1,158 @@
+
+{% liquid
+  assign last_updated = page.published_at | date: '%B %d, %Y'
+  if last_updated == blank
+    assign last_updated = 'now' | date: '%B %d, %Y'
+  endif
+%}
+
+<div class="fmp-page" id="fmp-top">
+
+  {{- 'fominoo-policy.css' | asset_url | stylesheet_tag -}}
+
+  {%- comment -%} ── HERO HEADER ── {%- endcomment -%}
+  <div class="fmp-hero">
+    <div class="fmp-hero__inner">
+      <nav class="fmp-breadcrumb" aria-label="Breadcrumb">
+        <a href="{{ routes.root_url }}" class="fmp-breadcrumb__link">Home</a>
+        <span class="fmp-breadcrumb__sep" aria-hidden="true">›</span>
+        <span class="fmp-breadcrumb__current">{{ page.title }}</span>
+      </nav>
+      <h1 class="fmp-hero__title">{{ page.title }}</h1>
+      <p class="fmp-hero__meta">
+        <span class="fmp-meta-badge">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Last updated: {{ last_updated }}
+        </span>
+        <span class="fmp-meta-badge">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Effective for US &amp; International customers
+        </span>
+      </p>
+    </div>
+  </div>
+
+  {%- comment -%} ── BODY ── {%- endcomment -%}
+  <div class="fmp-body">
+    <div class="fmp-body__inner">
+
+      {%- comment -%} ── SIDEBAR ── {%- endcomment -%}
+      <aside class="fmp-sidebar" aria-label="Page navigation">
+        <div class="fmp-sidebar__inner">
+          <p class="fmp-sidebar__label">On this page</p>
+          <nav class="fmp-toc" id="fmp-toc" aria-label="Table of contents">
+            {%- comment -%} filled by JS {%- endcomment -%}
+          </nav>
+          <div class="fmp-sidebar__policies">
+            <p class="fmp-sidebar__label" style="margin-top:28px">Other Policies</p>
+            <ul class="fmp-sidebar__policy-list">
+              <li><a href="{{ routes.root_url }}/policies/privacy-policy">Privacy Policy</a></li>
+              <li><a href="{{ routes.root_url }}/policies/refund-policy">Refund Policy</a></li>
+              <li><a href="{{ routes.root_url }}/policies/shipping-policy">Shipping Policy</a></li>
+              <li><a href="{{ routes.root_url }}/policies/terms-of-service">Terms of Service</a></li>
+            </ul>
+          </div>
+          <div class="fmp-sidebar__contact">
+            <p>Questions? <a href="{{ routes.root_url }}/pages/contact">Contact us</a></p>
+          </div>
+        </div>
+      </aside>
+
+      {%- comment -%} ── CONTENT ── {%- endcomment -%}
+      <article class="fmp-content" id="fmp-content">
+        <div class="fmp-rte rte">
+          {{ page.content }}
+        </div>
+        <div class="fmp-content__footer">
+          <p class="fmp-updated-note">This policy was last updated on {{ last_updated }}. If you have any questions, please <a href="{{ routes.root_url }}/pages/contact">contact our team</a>.</p>
+          <a href="#fmp-top" class="fmp-back-top" id="fmp-back-top" aria-label="Back to top">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+            Back to top
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  {%- comment -%} ── RELATED POLICIES BAND ── {%- endcomment -%}
+  <div class="fmp-related">
+    <div class="fmp-related__inner">
+      <p class="fmp-related__label">More Policies</p>
+      <div class="fmp-related__grid">
+        {%- for policy in shop.policies -%}
+          {%- if policy.url != page.url -%}
+            <a href="{{ policy.url }}" class="fmp-related__card">
+              <span class="fmp-related__card-icon" aria-hidden="true">
+                {%- if policy.title contains 'Privacy' -%}🔒
+                {%- elsif policy.title contains 'Refund' or policy.title contains 'Return' -%}↩️
+                {%- elsif policy.title contains 'Shipping' -%}📦
+                {%- elsif policy.title contains 'Terms' -%}📋
+                {%- else -%}📄
+                {%- endif -%}
+              </span>
+              <span class="fmp-related__card-title">{{ policy.title }}</span>
+              <span class="fmp-related__card-arrow">→</span>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Auto-generate Table of Contents from h2 headings
+  document.addEventListener('DOMContentLoaded', function () {
+    const content = document.getElementById('fmp-content');
+    const toc = document.getElementById('fmp-toc');
+    if (!content || !toc) return;
+    const headings = content.querySelectorAll('h2, h3');
+    if (headings.length === 0) return;
+    const ul = document.createElement('ul');
+    ul.className = 'fmp-toc__list';
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + i;
+      const li = document.createElement('li');
+      li.className = 'fmp-toc__item fmp-toc__item--' + h.tagName.toLowerCase();
+      const a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      a.className = 'fmp-toc__link';
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+    toc.appendChild(ul);
+
+    // Smooth scroll
+    toc.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Active TOC highlight
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        const id = entry.target.id;
+        const link = toc.querySelector('a[href="#' + id + '"]');
+        if (link) link.classList.toggle('fmp-toc__link--active', entry.isIntersecting);
+      });
+    }, { rootMargin: '-10% 0px -80% 0px' });
+    headings.forEach(function (h) { observer.observe(h); });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Policy Page",
+  "tag": "div",
+  "class": "fominoo-policy-wrapper section-wrapper",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [],
+  "presets": [{ "name": "Policy Page" }]
+}
+{% endschema %}
